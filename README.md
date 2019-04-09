@@ -10,7 +10,7 @@ Topics:
 * `reducer` functions control the values for the state properties.
 * `container` components are React components that connect to the Redux state
 * `actions` - objects produced by `action creators` that will be fed through all reducers.
-* `mapStateToProps()` & `connect`
+* `mapStateToProps()` & `connect` 
 
 ## Project Description
 
