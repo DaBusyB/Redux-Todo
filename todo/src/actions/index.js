@@ -1,2 +1,5 @@
-export {ADD_TASK, addTaskAction} from './taskActions'
+export {
+    ADD_TASK, addTaskAction,
+    TOGGLE_COMPLETE, toggleCompleteAction
+} from './taskActions'
 

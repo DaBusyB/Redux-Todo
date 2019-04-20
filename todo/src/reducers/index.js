@@ -1,4 +1,4 @@
-import { ADD_TASK } from '../actions'
+import { ADD_TASK, TOGGLE_COMPLETE } from '../actions'
 
 const initialState = {
     todoItems: [
@@ -19,6 +19,17 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 todoItems: [...state.todoItems, newTask]
+            }
+        case TOGGLE_COMPLETE:
+            return {
+                todoItems: state.todoItems.map(item => {
+                    if(item.id === action.payload) {
+                        return {
+                            ...item,
+                            completed: !item.completed
+                        }
+                    }
+                })
             }
 
         default: 

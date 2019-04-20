@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTaskAction } from '../actions'
+import { addTaskAction, toggleCompleteAction } from '../actions'
 
 
 class TodoList extends React.Component {
@@ -18,16 +18,23 @@ class TodoList extends React.Component {
         this.setState({ newTask: "" })
     }
 
+    toggleComplete = id => {
+        this.props.toggleCompleteAction(id)
+    }
+
     render() {
         return (
             <>
                 <div className='todo-container'> 
+                    <h1> Todo List </h1>
                     {this.props.todoItemsProp.map(item => (
                         <h4 key={item.id}>
                             {item.task}
+                        
                             {
                                 item.completed ? 
-                                <i className="far fa-grin" onClick={() => this.toggleComplete(item.id)} /> : 
+                                <i className="far fa-grin" onClick={() => this.toggleComplete(item.id)}/> 
+                                : 
                                 <i className="far fa-angry" onClick={() => this.toggleComplete(item.id)}/>
                             }
                         </h4>
@@ -55,5 +62,5 @@ const mapStateToProps = state => ({
 
 export default connect (
     mapStateToProps, 
-    { addTaskAction }
+    { addTaskAction, toggleCompleteAction }
 )(TodoList)
