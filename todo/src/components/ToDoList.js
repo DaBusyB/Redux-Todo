@@ -1,17 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { addTaskAction } from '../actions'
+
 
 class TodoList extends React.Component {
+    state = {
+        newTask: ''
+    }
+
+    handleChanges = e => {
+        this.setState({ [e.target.name] : e.target.value })
+    }
+
+    addNewTask = e => {
+        e.preventDefault()
+        this.props.addTaskAction(this.state.newTask)
+        this.setState({ newTask: "" })
+    }
 
     render() {
         return (
-            <div className='todo-container'> 
-                {this.props.todoItemsProp.map(item => (
-                    <h4 key={item.id}>
-                        {item.task}
-                    </h4>
-                ))} 
-            </div>
+            <>
+                <div className='todo-container'> 
+                    {this.props.todoItemsProp.map(item => (
+                        <h4 key={item.id}>
+                            {item.task}
+                            {
+                                item.completed ? 
+                                <i className="far fa-grin" onClick={() => this.toggleComplete(item.id)} /> : 
+                                <i className="far fa-angry" onClick={() => this.toggleComplete(item.id)}/>
+                            }
+                        </h4>
+                    ))} 
+                </div>
+
+                <input
+                    type='text'
+                    name='newTask'
+                    value={this.state.newTask}
+                    onChange={this.handleChanges}
+                    placeholder='Add new task'
+                />
+
+                <button onClick={this.addNewTask}>Add Task</button>
+            </>    
         )  
     }
     
@@ -23,6 +55,5 @@ const mapStateToProps = state => ({
 
 export default connect (
     mapStateToProps, 
-    {}
-)
-(TodoList)
+    { addTaskAction }
+)(TodoList)
