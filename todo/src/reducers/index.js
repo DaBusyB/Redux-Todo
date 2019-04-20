@@ -29,6 +29,7 @@ function reducer(state = initialState, action) {
                             completed: !item.completed
                         }
                     }
+                    return item
                 })
             }
 
